@@ -95,5 +95,4 @@ public class ContactPerson {
 	                + city + ", state=" + state + ", email=" + email + ", zip=" + zip + ", phoneNumber=" + phoneNumber
 	                + "]";
 	    }
-	    
 }

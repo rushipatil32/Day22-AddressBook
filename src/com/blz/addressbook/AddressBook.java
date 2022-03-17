@@ -92,21 +92,21 @@ public class AddressBook {
         }
         display();
     }
-    public  void  delete ()
-    {
+
+    public void delete() {
         int index;
         System.out.println("Enter the name of the contact to delete");
         String name = sc.next();
-        for( index=0;index<numberOfConatcts;index++)
-            if(contactBook[index].getFirstName().equals(name)) {
+        for (index = 0; index < numberOfConatcts; index++)
+            if (contactBook[index].getFirstName().equals(name)) {
                 break;
             }
-        while(contactBook[index+1]!= null) {
-            contactBook[index] = contactBook[index+1];
+        while (contactBook[index + 1] != null) {
+            contactBook[index] = contactBook[index + 1];
             index++;
         }
         contactBook[index] = null;
-        System.out.println("Deleted details of : "+ name);
+        System.out.println("Deleted details of : " + name);
     }
 
 
@@ -116,4 +116,11 @@ public class AddressBook {
         }
     }
 
+    public void addMultipleContacts() {
+        System.out.println("Enter number of contacts to Add");
+        int number = sc.nextInt();
+        for (int i = 0; i < number; i++) {
+            addContacts();
+        }
+    }
 }
