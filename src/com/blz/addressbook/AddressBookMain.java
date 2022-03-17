@@ -21,11 +21,10 @@ public class AddressBookMain {
         int option = 0;
         boolean exit = true;
         while(exit) {
-            System.out.println("Select option 1: add user.  2: edit existing user.  3: display all users 4:Delete contact. 5:Switch Address Book");
+            System.out.println("Select option 1: add user.  2: edit existing user.  3: display all users 4:Delete contact. 5:seach userby city 6: search user by state 7:Switch Address Book");
             option  = sc.nextInt();
             switch(option) {
                 case 1 :
-                    System.out.println("added");
                     addressBook.addContacts();
                     break;
                 case 2 :
@@ -40,6 +39,17 @@ public class AddressBookMain {
                     System.out.println("Enter name");
                     addressBook.delete();
                     break;
+                case 5:
+                    System.out.println("enter the name of the city");
+                    String cityName = sc.next();
+
+                    addressBook.searchByCity(cityName);
+                case 6:
+                    System.out.println("enter the name of the city");
+                    String stateName = sc.next();
+
+                    addressBook.searchByState(stateName);
+                    break;
                 default:
                     exit = false;
 
@@ -47,6 +57,7 @@ public class AddressBookMain {
             System.out.println();
         }
     }
+
     public static void main(String[] args) {
         System.out.println("Welcome to address book program");
         Scanner sc = new Scanner(System.in);
@@ -55,7 +66,7 @@ public class AddressBookMain {
         int choice =0;
         boolean exit1 = true;
         while(exit1) {
-            System.out.println("Select option 1:Add address Book 2:open Address Book 4:Display 5:exit");
+            System.out.println("Select option 1:Add address Book 2:open Address Book 3:exit");
             choice = sc.nextInt();
             switch(choice) {
                 case 1:
@@ -85,18 +96,11 @@ public class AddressBookMain {
                     currentBook = addressBooks.get(i);
                     addressMenu(currentBook);
                     break;
-                case 4:
-                    printAdressBooks();
                 default:
                     exit1 = false;
             }
         }
-        sc.close();
-    }
 
-    private static void printAdressBooks() {
-        for(String adressBooksDisplay : addressBookName){
-            System.out.println(adressBooksDisplay);
-        }
+        sc.close();
     }
 }

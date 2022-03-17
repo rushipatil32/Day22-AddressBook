@@ -3,6 +3,7 @@ package com.blz.addressbook;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.function.Predicate;
 
 public class AddressBook {
     private ArrayList<ContactPerson> contactBook = new ArrayList<ContactPerson>();
@@ -19,6 +20,7 @@ public class AddressBook {
         } else {
             contactBook.add(person);
         }
+
     }
 
 
@@ -32,48 +34,51 @@ public class AddressBook {
         for (index = 0; index < numberOfConatcts; index++)
             if (name.equals(contactBook.get(index).getFirstName())) {
                 System.out.println("name exists , now enter the new details");
-                switch (choice) {
-                    case 1:
-                        System.out.println("Enter new First Name");
-                        String newFirstName = sc.next();
-                        contactBook.get(index).setFirstName(newFirstName);
-                        break;
-                    case 2:
-                        System.out.println("Enter new Last Name");
-                        String newLastName = sc.next();
-                        contactBook.get(index).setLastName(newLastName);
-                        break;
-                    case 3:
-                        System.out.println("Enter new City");
-                        String newCity = sc.next();
-                        contactBook.get(index).setCity(newCity);
-                        break;
-                    case 4:
-                        System.out.println("Enter new State");
-                        String newState = sc.next();
-                        contactBook.get(index).setState(newState);
-                        break;
-                    case 5:
-                        System.out.println("Enter new State");
-                        int newZip = sc.nextInt();
-                        contactBook.get(index).setZip(newZip);
-                        break;
-                    case 6:
-                        System.out.println("Enter new Phone Number");
-                        int newPNumber = sc.nextInt();
-                        contactBook.get(index).setPhoneNumber(newPNumber);
-                        break;
-                    case 7:
-                        System.out.println("Enter new Email");
-                        String newEmail = sc.next();
-                        contactBook.get(index).setEmail(newEmail);
-                        break;
-                }
 
-
+                break;
             } else {
                 System.out.println("No contact found");
+                return;
             }
+        switch (choice) {
+            case 1:
+                System.out.println("Enter new First Name");
+                String newFirstName = sc.next();
+                contactBook.get(index).setFirstName(newFirstName);
+                break;
+            case 2:
+                System.out.println("Enter new Last Name");
+                String newLastName = sc.next();
+                contactBook.get(index).setLastName(newLastName);
+                break;
+            case 3:
+                System.out.println("Enter new City");
+                String newCity = sc.next();
+                contactBook.get(index).setCity(newCity);
+                break;
+            case 4:
+                System.out.println("Enter new State");
+                String newState = sc.next();
+                contactBook.get(index).setState(newState);
+                break;
+            case 5:
+                System.out.println("Enter new State");
+                int newZip = sc.nextInt();
+                contactBook.get(index).setZip(newZip);
+                break;
+            case 6:
+                System.out.println("Enter new Phone Number");
+                long newPNumber = sc.nextLong();
+                contactBook.get(index).setPhoneNumber(newPNumber);
+                break;
+            case 7:
+                System.out.println("Enter new Email");
+                String newEmail = sc.next();
+                contactBook.get(index).setEmail(newEmail);
+                break;
+        }
+
+
     }
 
     public void delete() {
@@ -91,7 +96,6 @@ public class AddressBook {
         contactBook.set(index, null);
         System.out.println("Deleted details of : " + name);
     }
-
 
     public void display() {
         ContactPerson person;
@@ -120,13 +124,35 @@ public class AddressBook {
         person1.setCity(sc.next());
         System.out.println("Enter State:");
         person1.setState(sc.next());
+        System.out.println("Enter email:");
+        person1.setEmail(sc.next());
         System.out.println("Enter Pin code:");
         person1.setZip(sc.nextInt());
         System.out.println("Enter Phone number:");
-        person1.setPhoneNumber(sc.nextInt());
-        System.out.println("Enter email:");
-        person1.setEmail(sc.next());
+        person1.setPhoneNumber(sc.nextLong());
         return person1;
+    }
+
+    public void searchByCity(String city) {
+        Predicate<ContactPerson> searchPerson = (contact -> contact.getCity().equals(city));
+        contactBook.stream().filter(searchPerson).forEach(person -> output(person));
+    }
+
+    public void searchByState(String state) {
+        Predicate<ContactPerson> searchPerson = (contact -> contact.getState().equals(state));
+        contactBook.stream().filter(searchPerson).forEach(person -> output(person));
+    }
+
+    private static void output(ContactPerson person) {
+        System.out.println("firstName : " + person.getFirstName());
+        System.out.println("SecondName : " + person.getLastName());
+        System.out.println("Address : " + person.getAddress());
+        System.out.println("City : " + person.getCity());
+        System.out.println("State : " + person.getState());
+        System.out.println("Pin code : " + person.getZip());
+        System.out.println("Phone number : " + person.getPhoneNumber());
+        System.out.println("email : " + person.getEmail());
+        System.out.println();
     }
 
 }
